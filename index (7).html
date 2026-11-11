@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SABORES SIN FRONTERAS</title>
+<style>
+/* 🎨 EDITA AQUÍ: cambia colores y letras de toda la página */
+:root{
+  --mango:#ff9f1c; --azafran:#ffd23f; --tropical:#1b9e5a; --chile:#e63946; --turquesa:#14c8c0;
+  --selva:#073b2c; --crema:#fff8e7;
+  --fuente-titulos:'Arial Black',Impact,'Trebuchet MS',sans-serif;
+  --fuente-texto:'Trebuchet MS','Segoe UI',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--fuente-texto);background:var(--crema);color:var(--selva);line-height:1.6}
+h1,h2,h3{font-family:var(--fuente-titulos);line-height:1.1}
+:focus-visible{outline:3px solid var(--turquesa);outline-offset:2px}
+.btn{border:0;cursor:pointer;font:inherit;font-weight:800;padding:.9rem 1.6rem;border-radius:999px;background:var(--chile);color:#fff;transition:transform .15s}
+.btn:hover{transform:scale(1.07) rotate(-1.5deg)}
+.btn.mango{background:var(--mango);color:var(--selva)}
+section{padding:4rem 1.2rem;max-width:1050px;margin:0 auto}
+section h2{font-size:clamp(1.7rem,5vw,2.6rem);margin-bottom:.5rem}
+
+nav{position:sticky;top:0;z-index:20;background:var(--selva);color:#fff;display:flex;justify-content:space-between;align-items:center;padding:.7rem 1.2rem}
+nav a.logo{font-family:var(--fuente-titulos);color:var(--azafran);text-decoration:none;font-size:1.05rem}
+nav ul{display:flex;gap:1.2rem;list-style:none}
+nav ul a{color:#fff;text-decoration:none;font-weight:700}
+nav ul a:hover{color:var(--azafran)}
+#burger{display:none;background:none;border:2px solid #fff;color:#fff;font-size:1.4rem;border-radius:8px;padding:0 .6rem;cursor:pointer}
+@media(max-width:640px){#burger{display:block}nav ul{display:none;position:absolute;top:100%;left:0;right:0;background:var(--selva);flex-direction:column;padding:1rem 1.2rem}nav ul.abierto{display:flex}}
+
+/* PORTADA */
+.hero{position:relative;overflow:hidden;background:radial-gradient(circle at 20% 10%,var(--tropical),var(--selva) 70%);color:#fff;text-align:center;padding:4rem 1.2rem 4rem}
+.hero>*{position:relative;z-index:2}
+.hero h1{font-size:clamp(2.2rem,8vw,4.6rem);color:var(--azafran);text-shadow:4px 4px 0 var(--chile);max-width:15ch;margin:0 auto 1rem}
+.hero p.sub{max-width:52ch;margin:0 auto 1.6rem;font-size:1.1rem}
+.flota{position:absolute;z-index:1;font-size:2.2rem;animation:flota 6s ease-in-out infinite;opacity:.85}
+@keyframes flota{50%{transform:translateY(-22px) rotate(15deg)}}
+.pulso{animation:pulso 1.8s infinite;font-size:1.1rem}
+@keyframes pulso{50%{box-shadow:0 0 0 14px rgba(230,57,70,.25)}}
+.globo-caja{position:relative;width:min(300px,78vw);aspect-ratio:1;margin:2rem auto 1rem}
+.globo{position:absolute;inset:12%;border-radius:50%;background:
+ radial-gradient(circle at 30% 30%,rgba(255,255,255,.45),transparent 40%),
+ repeating-linear-gradient(100deg,var(--turquesa) 0 38px,var(--tropical) 38px 70px,var(--azafran) 70px 82px);
+ background-size:100% 100%,240px 100%;animation:gira 14s linear infinite;box-shadow:inset -22px -18px 40px rgba(0,0,0,.45),0 0 50px rgba(20,200,192,.5)}
+@keyframes gira{to{background-position:0 0,240px 0}}
+.punto{position:absolute;transform:translate(-50%,-50%);background:#fff;color:var(--selva);border:3px solid var(--chile);border-radius:999px;font:inherit;font-weight:800;font-size:.8rem;padding:.2rem .7rem;cursor:pointer;transition:transform .15s}
+.punto:hover,.punto:focus-visible{transform:translate(-50%,-50%) scale(1.2);background:var(--azafran)}
+.globo-txt{min-height:1.6rem;font-weight:800;color:var(--azafran);margin-bottom:.8rem}
+.dia{display:flex;align-items:center;gap:1rem;max-width:460px;margin:1.6rem auto 0;background:rgba(255,255,255,.12);border:2px dashed var(--azafran);border-radius:20px;padding:1rem 1.2rem;text-align:left;cursor:pointer;color:#fff;font:inherit;width:100%}
+.dia .em{font-size:3rem}
+.dia small{color:var(--azafran);font-weight:800}
+
+/* CINTA DE PAÍSES */
+.cinta{background:var(--chile);color:#fff;overflow:hidden;white-space:nowrap;font-family:var(--fuente-titulos);padding:.6rem 0}
+.cinta div{display:inline-block;animation:cinta 28s linear infinite}
+@keyframes cinta{to{transform:translateX(-50%)}}
+
+/* RECETAS */
+.herr{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin:1rem 0 1.4rem}
+.herr input{font:inherit;padding:.5rem 1rem;border:3px solid var(--selva);border-radius:999px;min-width:200px;flex:1}
+.filtros{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.4rem}
+.filtros button{border:3px solid var(--selva);background:#fff;font:inherit;font-weight:800;padding:.4rem 1rem;border-radius:999px;cursor:pointer}
+.filtros button.activo{background:var(--tropical);color:#fff;border-color:var(--tropical)}
+.rejilla{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:1.2rem}
+.tarjeta{border:0;border-radius:22px;padding:0;overflow:hidden;cursor:pointer;text-align:left;font:inherit;color:inherit;background:#fff;box-shadow:0 4px 0 var(--selva);transition:transform .2s;position:relative}
+.tarjeta:hover{transform:translateY(-8px) rotate(-1deg)}
+.tarjeta .foto{height:150px;display:grid;place-items:center;font-size:4.5rem;position:relative;overflow:hidden}
+.tarjeta .foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.tarjeta .info{padding:1rem}
+.tarjeta h3{font-size:1.15rem}
+.tarjeta small{font-weight:700;opacity:.75}
+.tarjeta .fav{position:absolute;top:8px;right:8px;z-index:3;background:#fff;border-radius:50%;width:34px;height:34px;display:grid;place-items:center;font-size:1.1rem}
+.vacio{grid-column:1/-1;padding:1rem}
+.sellos{margin-top:1.4rem;font-weight:800}
+.sellos div{height:12px;background:#ead9b0;border-radius:99px;overflow:hidden;margin-top:.4rem}
+.sellos i{display:block;height:100%;width:0;background:var(--tropical);transition:width .4s}
+
+/* QUIZ */
+.quiz{background:var(--selva);color:#fff;border-radius:28px;padding:2.2rem 1.4rem;text-align:center}
+.quiz h2{color:var(--azafran)}
+.quiz .ops{display:flex;flex-wrap:wrap;gap:.7rem;justify-content:center;margin-top:1.2rem}
+
+/* MODAL */
+#modal{position:fixed;inset:0;background:rgba(7,59,44,.88);display:none;align-items:center;justify-content:center;padding:1rem;z-index:50}
+#modal.abierto{display:flex}
+.caja{background:var(--crema);border-radius:24px;max-width:620px;width:100%;max-height:92vh;overflow:auto;padding:1.6rem;position:relative}
+.cerrar{position:absolute;top:8px;right:14px;background:none;border:0;font-size:2.2rem;cursor:pointer}
+.caja h2{font-size:1.7rem;margin-bottom:.3rem;padding-right:2rem}
+.caja h3{margin:1rem 0 .4rem;font-size:1.05rem;color:var(--chile)}
+.datos{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0}
+.datos span{background:var(--azafran);border-radius:999px;padding:.1rem .8rem;font-weight:800;font-size:.85rem}
+.cur{background:#fff;border-left:6px solid var(--turquesa);padding:.6rem .9rem;border-radius:10px}
+.ctrl{display:flex;align-items:center;gap:.7rem;flex-wrap:wrap;margin:.6rem 0}
+.ctrl button.c{width:36px;height:36px;border-radius:50%;border:2px solid var(--selva);background:#fff;font-size:1.2rem;cursor:pointer}
+.caja ul{list-style:none}.caja li{padding:.2rem 0}
+.caja input:checked+span{text-decoration:line-through;opacity:.5}
+.caja ol{list-style:none;counter-reset:p}
+.caja ol li{counter-increment:p;padding:.5rem .7rem .5rem 2.6rem;position:relative;cursor:pointer;border-radius:10px;margin-bottom:.3rem;background:#fff}
+.caja ol li::before{content:counter(p);position:absolute;left:.6rem;top:.45rem;width:1.7rem;height:1.7rem;border-radius:50%;background:var(--mango);font-weight:800;text-align:center}
+.caja ol li.hecho{opacity:.45;text-decoration:line-through}
+.caja ol li.hecho::before{content:"✓";background:var(--tropical);color:#fff}
+.veg{background:#e5f7ea;border-radius:12px;padding:.7rem 1rem;margin-top:.8rem;transition:outline .2s}
+.veg.on{outline:3px solid var(--tropical)}
+.favb{margin-top:1rem;width:100%}
+
+footer{background:var(--selva);color:#fff;text-align:center;padding:3rem 1.2rem}
+footer a{color:var(--azafran);font-weight:800}
+#aviso{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--selva);color:var(--azafran);font-weight:800;padding:.7rem 1.4rem;border-radius:99px;transition:transform .3s;z-index:70;text-align:center}
+#aviso.ver{transform:translateX(-50%) translateY(0)}
+.conf{position:fixed;top:-40px;font-size:1.8rem;z-index:80;pointer-events:none;animation:cae 2.6s ease-in forwards}
+@keyframes cae{to{transform:translateY(110vh) rotate(540deg)}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<nav>
+  <a class="logo" href="#inicio">🌶️ SABORES SIN FRONTERAS</a>
+  <button id="burger" aria-label="Abrir menú">☰</button>
+  <ul id="menu"><li><a href="#recetas">Recetas</a></li><li><a href="#quiz">Test</a></li><li><a href="#contacto">Contacto</a></li></ul>
+</nav>
+
+<header class="hero" id="inicio">
+  <span class="flota" style="left:6%;top:12%">🌶️</span>
+  <span class="flota" style="right:8%;top:18%;animation-delay:1s">🥭</span>
+  <span class="flota" style="left:12%;bottom:12%;animation-delay:2s">🍋</span>
+  <span class="flota" style="right:12%;bottom:16%;animation-delay:3s">🌿</span>
+  <span class="flota" style="left:45%;top:4%;animation-delay:4s">🧄</span>
+
+  <!-- ✏️ EDITA AQUÍ: título y subtítulo -->
+  <h1>¡EL MUNDO CABE EN TU PLATO!</h1>
+  <p class="sub">Viaja por el planeta sin salir de tu cocina. Descubre, cocina, juega y saborea culturas extraordinarias.</p>
+  <button class="btn pulso" id="cta">¡QUIERO SABOREAR EL MUNDO!</button>
+
+  <div class="globo-caja">
+    <div class="globo"></div>
+    <button class="punto" data-c="América" style="left:20%;top:42%">América</button>
+    <button class="punto" data-c="Europa" style="left:52%;top:10%">Europa</button>
+    <button class="punto" data-c="África" style="left:62%;top:58%">África</button>
+    <button class="punto" data-c="Asia" style="left:88%;top:34%">Asia</button>
+    <button class="punto" data-c="Oceanía" style="left:78%;top:88%">Oceanía</button>
+  </div>
+  <p class="globo-txt" id="globoTxt">👆 Toca un continente del globo</p>
+  <button class="btn mango" id="sorpresa">🎲 Plato sorpresa</button>
+  <button class="dia" id="dia" aria-label="Ver plato del día"><span class="em" id="diaEm"></span><span><small>PLATO DEL DÍA</small><br><strong id="diaNom"></strong></span></button>
+</header>
+
+<div class="cinta" aria-hidden="true"><div id="cinta"></div></div>
+
+<section id="recetas">
+  <h2>Recetas de todos los rincones</h2>
+  <p>Busca, filtra, toca una tarjeta y cocina. ¡Guarda tus favoritas con ❤️!</p>
+  <div class="herr"><input id="buscar" type="search" placeholder="🔍 Busca un plato o un país..." aria-label="Buscar recetas"></div>
+  <div class="filtros" id="filtros"></div>
+  <div class="rejilla" id="rejilla"></div>
+  <div class="sellos">🏅 Pasaporte: <span id="sellos">0</span> de <span id="total"></span> sellos<div><i id="barra"></i></div></div>
+</section>
+
+<section id="quiz">
+  <div class="quiz">
+    <h2 id="qT">¿Qué plato del mundo eres?</h2>
+    <p id="qX">Responde 3 preguntas y descubre tu plato ideal.</p>
+    <div class="ops" id="qO"><button class="btn mango" id="qI">Empezar</button></div>
+  </div>
+</section>
+
+<footer id="contacto">
+  <h2>¿Tienes una receta para compartir?</h2>
+  <!-- ✏️ EDITA AQUÍ: tu correo (nunca teléfono ni dirección) -->
+  <p style="margin:.8rem 0">Escríbenos: <a href="mailto:tucorreo@ejemplo.com">tucorreo@ejemplo.com</a></p>
+  <p>© SABORES SIN FRONTERAS</p>
+</footer>
+
+<div id="modal" role="dialog" aria-modal="true" aria-labelledby="mT">
+  <div class="caja">
+    <button class="cerrar" id="cerrar" aria-label="Cerrar">×</button>
+    <h2 id="mT"></h2>
+    <div class="datos" id="mD"></div>
+    <p class="cur" id="mC"></p>
+    <div class="ctrl"><span>Porciones:</span><button class="c" id="menos" aria-label="Menos">−</button><strong id="porc">4</strong><button class="c" id="mas" aria-label="Más">+</button>
+      <label style="margin-left:auto"><input type="checkbox" id="vegan"> 🌱 Versión vegana</label></div>
+    <h3>Ingredientes</h3><ul id="mI"></ul>
+    <h3>Preparación <small>(toca cada paso al terminarlo)</small></h3><ol id="mP"></ol>
+    <h3>Nutrición aproximada (por porción)</h3><p id="mN"></p>
+    <h3>Consejo del chef</h3><p id="mTip"></p>
+    <div class="veg" id="mV"></div>
+    <button class="btn favb" id="favb"></button>
+  </div>
+</div>
+<div id="aviso"></div>
+
+<script>
+/* ✏️ EDITA AQUÍ: tus recetas (cantidades para 4 porciones). Copia un bloque { } para añadir otra.
+   foto: pega el enlace de tu foto (o "imagenes/tacos.jpg"). Si lo dejas vacío se muestra el emoji. */
+const recetas=[
+{e:"🍜",nombre:"Pad Thai",pais:"Tailandia",cont:"Asia",min:30,dif:"Media",foto:"",col:"#ffd23f",
+ cur:"Se popularizó en los años 40 como plato nacional para unir al país alrededor de una comida barata y deliciosa.",
+ ing:[[250,"g","fideos de arroz"],[3,"","huevos"],[200,"g","camarones"],[4,"cdas","salsa de tamarindo"],[3,"cdas","maní molido"],[2,"","limas"]],
+ pasos:["Hidrata los fideos en agua caliente 10 minutos.","Saltea los camarones y añade los huevos revueltos.","Agrega fideos y salsa; mezcla 2 minutos.","Sirve con maní y limón."],
+ nut:"≈ 480 kcal · 22 g proteína · 62 g carbohidratos",tip:"Usa fuego muy fuerte y cocina en tandas pequeñas para que no se pegue.",
+ veg:"Vegetariano: cambia los camarones por tofu firme. Vegano: tofu y sin huevo."},
+{e:"🍣",nombre:"Sushi casero",pais:"Japón",cont:"Asia",min:60,dif:"Media",foto:"",col:"#14c8c0",
+ cur:"El sushi nació como forma de conservar pescado en arroz fermentado. El arroz era lo que se botaba.",
+ ing:[[400,"g","arroz para sushi"],[4,"cdas","vinagre de arroz"],[6,"","hojas de nori"],[200,"g","salmón fresco"],[1,"","pepino"],[1,"","aguacate"]],
+ pasos:["Cocina el arroz y mézclalo con vinagre y un poco de azúcar.","Extiende arroz sobre el nori, dejando un borde libre.","Pon salmón, pepino y aguacate en una línea.","Enrolla firme y corta con cuchillo mojado."],
+ nut:"≈ 390 kcal · 17 g proteína · 60 g carbohidratos",tip:"Moja tus manos en agua con vinagre para que el arroz no se pegue.",
+ veg:"Vegetariano y vegano: rellena solo con pepino, aguacate, zanahoria y mango."},
+{e:"🍝",nombre:"Pasta al pomodoro",pais:"Italia",cont:"Europa",min:25,dif:"Fácil",foto:"",col:"#ff9f1c",
+ cur:"En Italia, la pasta se cocina «al dente»: firme al morder. ¡Cocinarla de más es casi un pecado!",
+ ing:[[400,"g","espagueti"],[600,"g","tomates maduros"],[3,"dientes","ajo"],[4,"cdas","aceite de oliva"],[1,"puñado","albahaca"]],
+ pasos:["Hierve la pasta en agua con sal.","Sofríe el ajo en aceite y añade los tomates picados.","Cocina la salsa 15 minutos.","Mezcla con la pasta y albahaca."],
+ nut:"≈ 520 kcal · 15 g proteína · 88 g carbohidratos",tip:"Guarda una taza del agua de cocción: da cremosidad a la salsa.",
+ veg:"Ya es vegetariana y vegana. Añade parmesano solo si no eres vegano."},
+{e:"🥘",nombre:"Paella",pais:"España",cont:"Europa",min:60,dif:"Media",foto:"",col:"#e63946",
+ cur:"La paella nació en Valencia. «Paella» es el nombre de la sartén ancha, no del arroz.",
+ ing:[[400,"g","arroz bomba"],[1,"l","caldo"],[1,"pizca","azafrán"],[300,"g","pollo"],[200,"g","mariscos"],[1,"","pimentón rojo"]],
+ pasos:["Dora el pollo en la paellera con aceite.","Añade el pimentón y el arroz; mezcla un minuto.","Vierte el caldo con azafrán y no revuelvas más.","Agrega los mariscos y cocina 18 minutos."],
+ nut:"≈ 560 kcal · 30 g proteína · 70 g carbohidratos",tip:"El «socarrat», el arroz dorado del fondo, es lo más delicioso.",
+ veg:"Vegetariana y vegana: usa alcachofas, judías verdes, pimentón y caldo de verduras."},
+{e:"🍲",nombre:"Tajín de verduras",pais:"Marruecos",cont:"África",min:50,dif:"Media",foto:"",col:"#1b9e5a",
+ cur:"Su olla de barro con tapa cónica hace que el vapor vuelva a caer sobre la comida, ¡y casi no necesita agua!",
+ ing:[[2,"","zanahorias"],[2,"","papas"],[1,"lata","garbanzos"],[1,"","cebolla"],[2,"cdtas","comino y cúrcuma"],[8,"","ciruelas pasas"]],
+ pasos:["Sofríe la cebolla con las especias.","Añade verduras, garbanzos y medio vaso de agua.","Tapa y cocina a fuego bajo 35 minutos.","Agrega las ciruelas al final."],
+ nut:"≈ 340 kcal · 11 g proteína · 58 g carbohidratos",tip:"Sírvelo con cuscús o pan caliente para mojar la salsa.",
+ veg:"Es vegano tal cual. Para no vegetarianos: se le puede añadir pollo o cordero."},
+{e:"🍛",nombre:"Arroz jollof",pais:"Nigeria",cont:"África",min:45,dif:"Media",foto:"",col:"#e63946",
+ cur:"En África occidental hay una rivalidad amistosa: Nigeria y Ghana discuten cuál jollof es el mejor.",
+ ing:[[2,"tazas","arroz"],[4,"","tomates"],[2,"","pimentones rojos"],[1,"","cebolla"],[1,"cdta","curry"],[2,"tazas","caldo"]],
+ pasos:["Licúa tomates, pimentones y cebolla.","Cocina la salsa con curry hasta que espese.","Agrega el arroz y el caldo.","Tapa y cocina a fuego bajo hasta que se seque."],
+ nut:"≈ 400 kcal · 9 g proteína · 78 g carbohidratos",tip:"Deja que la base se «ahúme» un poquito al fondo: es el toque secreto.",
+ veg:"Vegano usando caldo de verduras. Para no vegetarianos: añade pollo asado."},
+{e:"🌮",nombre:"Tacos mexicanos",pais:"México",cont:"América",min:35,dif:"Fácil",foto:"",col:"#1b9e5a",
+ cur:"La tortilla de maíz tiene más de 3.000 años. La UNESCO declaró la cocina mexicana Patrimonio de la Humanidad.",
+ ing:[[12,"","tortillas de maíz"],[500,"g","pollo o cerdo en tiras"],[2,"","tomates"],[1,"","cebolla"],[2,"","aguacates"],[3,"","limones"]],
+ pasos:["Sazona la carne con sal, comino y limón.","Dórala en sartén caliente.","Calienta las tortillas.","Arma con carne, cebolla, tomate y aguacate."],
+ nut:"≈ 430 kcal · 28 g proteína · 40 g carbohidratos",tip:"Calienta las tortillas directo sobre la llama unos segundos.",
+ veg:"Vegetariano: champiñones o frijoles. Vegano: igual, sin crema ni queso."},
+{e:"🫓",nombre:"Arepas rellenas",pais:"Colombia",cont:"América",min:30,dif:"Fácil",foto:"",col:"#ffd23f",
+ cur:"En Colombia y Venezuela hay arepas en el desayuno, la cena y hasta de snack. ¡Se comen con casi todo!",
+ ing:[[2,"tazas","harina de maíz precocida"],[2.5,"tazas","agua tibia"],[1,"cdta","sal"],[200,"g","queso"],[2,"","aguacates"],[1,"cda","aceite"]],
+ pasos:["Mezcla harina, agua y sal; amasa y deja reposar 5 minutos.","Forma discos de 1 cm de grosor.","Cocina en sartén 6 minutos por lado.","Ábrelas y rellena con queso y aguacate."],
+ nut:"≈ 410 kcal · 13 g proteína · 55 g carbohidratos",tip:"Si la masa se agrieta, añade un poquito más de agua tibia.",
+ veg:"Vegetariana con queso. Vegana: rellena con aguacate, frijoles negros y plátano."},
+{e:"🍰",nombre:"Pavlova",pais:"Australia",cont:"Oceanía",min:90,dif:"Difícil",foto:"",col:"#14c8c0",
+ cur:"Australia y Nueva Zelanda llevan décadas discutiendo quién la inventó. Se nombró por la bailarina Anna Pavlova.",
+ ing:[[4,"","claras de huevo"],[220,"g","azúcar"],[1,"cdta","vinagre"],[250,"ml","crema para batir"],[300,"g","fresas y maracuyá"]],
+ pasos:["Bate las claras a punto de nieve.","Agrega azúcar poco a poco y el vinagre.","Hornea a 120 °C por 75 minutos.","Deja enfriar y cubre con crema y frutas."],
+ nut:"≈ 310 kcal · 5 g proteína · 45 g carbohidratos",tip:"No abras el horno mientras se hornea: el merengue se agrieta.",
+ veg:"Vegetariana. Vegana: usa aquafaba (agua de garbanzos) y crema de coco."}
+];
+const $=id=>document.getElementById(id);
+const num=x=>Math.round(x*10)/10;
+let cont="Todas",vis=new Set(),favs=new Set(),act=null,por=4,fin=false;
+recetas.forEach((r,i)=>r.id=i);
+$("total").textContent=recetas.length;
+
+function aviso(t){const a=$("aviso");a.textContent=t;a.classList.add("ver");setTimeout(()=>a.classList.remove("ver"),2300)}
+function confeti(){const em=["🌶️","🥭","🍋","🌿","⭐","🍤"];for(let i=0;i<30;i++){const s=document.createElement("span");s.className="conf";
+  s.textContent=em[i%em.length];s.style.left=Math.random()*100+"vw";s.style.animationDelay=Math.random()*.8+"s";document.body.appendChild(s);setTimeout(()=>s.remove(),3600)}}
+$("burger").onclick=()=>$("menu").classList.toggle("abierto");
+$("menu").onclick=()=>$("menu").classList.remove("abierto");
+$("cta").onclick=()=>$("recetas").scrollIntoView();
+
+/* Cinta con países */
+const paises=recetas.map(r=>r.e+" "+r.pais.toUpperCase()).join("   ✦   ")+"   ✦   ";
+$("cinta").textContent=paises+paises;
+
+/* Filtros, búsqueda, favoritas */
+const conts=["Todas","Asia","Europa","África","América","Oceanía","❤️ Favoritas"];
+$("filtros").innerHTML=conts.map(c=>`<button data-c="${c}">${c}</button>`).join("");
+function filtrar(c){cont=c;document.querySelectorAll("#filtros button").forEach(b=>b.classList.toggle("activo",b.dataset.c===c));pintar()}
+$("filtros").onclick=e=>{if(e.target.dataset.c)filtrar(e.target.dataset.c)};
+$("buscar").oninput=pintar;
+function pintar(){
+  const q=$("buscar").value.toLowerCase().trim();
+  const l=recetas.filter(r=>(cont==="Todas"||(cont==="❤️ Favoritas"?favs.has(r.id):r.cont===cont))&&(r.nombre+" "+r.pais).toLowerCase().includes(q));
+  $("rejilla").innerHTML=l.length?l.map(r=>`<button class="tarjeta" data-id="${r.id}">
+   <span class="fav">${favs.has(r.id)?"❤️":"🤍"}</span>
+   <div class="foto" style="background:${r.col}">${r.e}${r.foto?`<img src="${r.foto}" alt="${r.nombre}" onerror="this.remove()">`:""}</div>
+   <div class="info"><h3>${r.nombre}</h3><small>${r.pais} · ${r.min} min · ${r.dif}</small></div></button>`).join("")
+   :`<p class="vacio">${cont==="❤️ Favoritas"?"Aún no tienes favoritas. Abre una receta y toca ❤️.":"No encontramos nada. Prueba con otra palabra o continente."}</p>`;
+}
+$("rejilla").onclick=e=>{const t=e.target.closest(".tarjeta");if(t)abrir(+t.dataset.id)};
+
+/* Globo, plato del día, sorpresa */
+document.querySelectorAll(".punto").forEach(p=>{
+  p.onmouseenter=()=>$("globoTxt").textContent="✈️ Volando a "+p.dataset.c+"...";
+  p.onclick=()=>{filtrar(p.dataset.c);$("globoTxt").textContent="¡Aterrizaste en "+p.dataset.c+"! 🛬";setTimeout(()=>$("recetas").scrollIntoView(),500)}});
+const hoy=recetas[new Date().getDate()%recetas.length];
+$("diaEm").textContent=hoy.e;$("diaNom").textContent=hoy.nombre+" · "+hoy.pais;
+$("dia").onclick=()=>abrir(hoy.id);
+const azar=()=>recetas[Math.floor(Math.random()*recetas.length)];
+$("sorpresa").onclick=()=>{let n=0;const t=setInterval(()=>{$("globoTxt").textContent=azar().e+" ...";
+  if(++n>10){clearInterval(t);const r=azar();$("globoTxt").textContent="¡Hoy toca "+r.nombre+"!";setTimeout(()=>abrir(r.id),600)}},100)};
+
+/* Receta */
+function abrir(id){
+  act=recetas[id];por=4;$("vegan").checked=false;$("mV").classList.remove("on");
+  if(!vis.has(id)){vis.add(id);$("sellos").textContent=vis.size;$("barra").style.width=vis.size/recetas.length*100+"%";aviso("🏅 ¡Sello nuevo: "+act.pais+"!");
+    if(vis.size===recetas.length&&!fin){fin=true;confeti();setTimeout(()=>aviso("🎉 ¡Pasaporte completo! Eres un viajero del sabor"),2400)}}
+  $("mT").textContent=act.e+" "+act.nombre;
+  $("mD").innerHTML=`<span>📍 ${act.pais}</span><span>⏱️ ${act.min} min</span><span>🔥 ${act.dif}</span>`;
+  $("mC").textContent="💡 Curiosidad: "+act.cur;
+  $("mP").innerHTML=act.pasos.map(p=>`<li>${p}</li>`).join("");
+  $("mN").textContent=act.nut;$("mTip").textContent=act.tip;$("mV").textContent="🌱 "+act.veg;
+  favBtn();ing();$("modal").classList.add("abierto");
+}
+function ing(){$("porc").textContent=por;
+  $("mI").innerHTML=act.ing.map(i=>`<li><label><input type="checkbox"> <span>${num(i[0]*por/4)} ${i[1]} ${i[2]}</span></label></li>`).join("")}
+function favBtn(){$("favb").textContent=favs.has(act.id)?"❤️ Guardada en favoritas":"🤍 Guardar en favoritas"}
+$("favb").onclick=()=>{favs.has(act.id)?favs.delete(act.id):favs.add(act.id);favBtn();pintar();if(favs.has(act.id))aviso("❤️ ¡Guardada!")};
+$("mP").onclick=e=>{const li=e.target.closest("li");if(!li)return;li.classList.toggle("hecho");
+  const t=$("mP").children.length;if($("mP").querySelectorAll(".hecho").length===t){confeti();aviso("👨‍🍳 ¡Plato terminado! Buen provecho")}};
+$("mas").onclick=()=>{if(por<12){por++;ing()}};
+$("menos").onclick=()=>{if(por>1){por--;ing()}};
+$("vegan").onchange=()=>{$("mV").classList.toggle("on",$("vegan").checked);if($("vegan").checked)aviso("🌱 Mira el recuadro verde de alternativas")};
+$("cerrar").onclick=()=>$("modal").classList.remove("abierto");
+$("modal").onclick=e=>{if(e.target===$("modal"))$("modal").classList.remove("abierto")};
+document.addEventListener("keydown",e=>{if(e.key==="Escape")$("modal").classList.remove("abierto")});
+
+/* Test: ¿qué plato eres? (cada respuesta suma a un plato por su número en la lista de recetas) */
+const preg=[
+ {q:"¿Cuál es tu plan ideal?",o:[["Fiesta con amigos",6],["Día de playa",7],["Aventura por una ciudad nueva",1],["Tarde tranquila en casa",2]]},
+ {q:"¿Qué sabor prefieres?",o:[["Fresco y cítrico",1],["Dulce",7],["Picante",5],["Intenso y ahumado",3]]},
+ {q:"¿Cuál es tu superpoder?",o:[["Improvisar",5],["Organizarme",4],["Hacer reír",6],["Ser creativo",0]]}
+];
+let pa=0,pt=[];
+function pq(){const p=preg[pa];$("qT").textContent=p.q;$("qX").textContent="Pregunta "+(pa+1)+" de 3";
+  $("qO").innerHTML=p.o.map(o=>`<button class="btn mango" data-v="${o[1]}">${o[0]}</button>`).join("")}
+$("qI").onclick=()=>{pa=0;pt=[];pq()};
+$("qO").onclick=e=>{const v=e.target.dataset.v;if(v===undefined)return;pt.push(+v);pa++;if(pa<3)return pq();
+  const c={};pt.forEach(x=>c[x]=(c[x]||0)+1);
+  const id=+Object.keys(c).sort((a,b)=>c[b]-c[a])[0],r=recetas[id];
+  $("qT").textContent="¡Eres "+r.nombre+"! "+r.e;$("qX").textContent="Tu plato del mundo viene de "+r.pais+".";
+  $("qO").innerHTML=`<button class="btn mango" id="ver">Ver la receta</button><button class="btn" id="otra">Repetir test</button>`;
+  confeti();$("ver").onclick=()=>abrir(r.id);$("otra").onclick=()=>{pa=0;pt=[];pq()}};
+pintar();
+</script>
+</body>
+</html>
